@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node *prev;
+    struct node *next;
+} Node;
+
+Node* taoPhanTu(int giaTri) {
+    Node* phanTu = (Node*)malloc(sizeof(Node));
+    phanTu->data = giaTri;
+    phanTu->prev = NULL;
+    phanTu->next = NULL;
+    return phanTu;
+}
+
+int main() {
+    Node* dau = taoPhanTu(10);
+    Node* hai = taoPhanTu(20);
+    Node* ba = taoPhanTu(30);
+    Node* bon = taoPhanTu(40);
+    Node* nam = taoPhanTu(50);
+
+    dau->next = hai;
+    hai->prev = dau;
+    hai->next = ba;
+    ba->prev = hai;
+    ba->next = bon;
+    bon->prev = ba;
+    bon->next = nam;
+    nam->prev = bon;
+
+    Node* p = dau;
+    while (p != NULL) {
+        printf("%d ", p->data);
+        p = p->next;
+    }
+
+    return 0;
+}
