@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node* prev;
+    struct node* next;
+} Node;
+
+Node* taoPhanTu(int giaTri) {
+    Node* p = (Node*)malloc(sizeof(Node));
+    p->data = giaTri;
+    p->prev = NULL;
+    p->next = NULL;
+    return p;
+}
+
+int timKiem(Node* head, int x) {
+    Node* p = head;
+    while (p != NULL) {
+        if (p->data == x) return 1;
+        p = p->next;
+    }
+    return 0;
+}
+
+int main() {
+    Node* n1 = taoPhanTu(1);
+    Node* n2 = taoPhanTu(2);
+    Node* n3 = taoPhanTu(3);
+    Node* n4 = taoPhanTu(4);
+    Node* n5 = taoPhanTu(5);
+
+    n1->next = n2;
+    n2->prev = n1;
+    n2->next = n3;
+    n3->prev = n2;
+    n3->next = n4;
+    n4->prev = n3;
+    n4->next = n5;
+    n5->prev = n4;
+
+    int x;
+    printf("Nhap so nguyen duong: ");
+    scanf("%d", &x);
+
+    if (timKiem(n1, x))
+        printf("True\n");
+    else
+        printf("False\n");
+
+    return 0;
+}
